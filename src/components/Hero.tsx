@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section id="hero" className="flex min-h-screen items-center px-6">
       {/* Hero content */}
-      <div className="flex w-full max-w-6xl flex-col items-center gap-12 lg:flex-row lg:justify-between m-20">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-12 lg:flex-row lg:justify-between">
         <div className="max-w-xl pt-12 sm:pt-0 lg:max-w-2xl mt-12">
           <h1 className="animate-fade-in-up text-4xl font-bold tracking-tight text-stone-900 sm:text-5xl md:text-6xl lg:text-7xl dark:text-zinc-50">
             Abdullah Ariyanto
