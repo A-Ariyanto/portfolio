@@ -3,9 +3,8 @@ import { useScrollSpy } from '../hooks/useScrollSpy'
 
 const NAV_ITEMS = [
   { id: 'hero', label: 'Home' },
-  { id: 'flagship', label: 'Case Studies' },
-  { id: 'craftsmanship', label: 'Craftsmanship' },
   { id: 'projects', label: 'Projects' },
+  { id: 'craftsmanship', label: 'Craftsmanship' },
   { id: 'leadership', label: 'Leadership' },
 ]
 

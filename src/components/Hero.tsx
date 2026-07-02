@@ -25,7 +25,7 @@ export default function Hero() {
           {/* CTA buttons */}
           <div className="animate-fade-in-up animation-delay-300 mt-10 flex flex-wrap items-center gap-4">
             <button
-              onClick={() => scrollTo("flagship")}
+              onClick={() => scrollTo("projects")}
               className="group inline-flex items-center gap-2 rounded-lg bg-stone-900 px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-stone-800 dark:bg-teal-500 dark:text-zinc-950 dark:hover:bg-teal-400"
             >
               View Work
