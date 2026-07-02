@@ -6,45 +6,39 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden px-6"
+      className="flex min-h-screen items-center px-6"
     >
-      {/* Background gradient orbs */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/10 blur-3xl dark:bg-indigo-500/5" />
-        <div className="absolute right-1/4 bottom-1/3 h-96 w-96 translate-x-1/2 rounded-full bg-emerald-500/10 blur-3xl dark:bg-emerald-500/5" />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-4xl text-center">
+      <div className="mx-auto w-full max-w-6xl">
         {/* Status badge */}
-        <div className="animate-fade-in mb-8 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/60 px-4 py-1.5 text-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/60">
+        <div className="animate-fade-in mb-8 inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-4 py-1.5 text-sm dark:border-zinc-800 dark:bg-zinc-900">
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75 dark:bg-teal-400" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500 dark:bg-teal-500" />
           </span>
-          <span className="text-slate-600 dark:text-slate-400">
+          <span className="text-stone-600 dark:text-zinc-400">
             Open to opportunities
           </span>
         </div>
 
-        <h1 className="animate-fade-in-up text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl md:text-6xl dark:text-white">
+        <h1 className="animate-fade-in-up max-w-3xl text-4xl font-bold tracking-tight text-stone-900 sm:text-5xl md:text-6xl lg:text-7xl dark:text-zinc-50">
           Abdullah Ariyanto
         </h1>
 
-        <p className="animate-fade-in-up animation-delay-100 mt-2 font-mono text-lg font-medium text-indigo-600 sm:text-xl dark:text-indigo-400">
+        <p className="animate-fade-in-up animation-delay-100 mt-3 font-mono text-lg font-medium text-green-700 sm:text-xl dark:text-teal-400">
           Full-Stack Software Engineer
         </p>
 
-        <p className="animate-fade-in-up animation-delay-200 mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+        <p className="animate-fade-in-up animation-delay-200 mt-6 max-w-xl text-lg leading-relaxed text-stone-500 dark:text-zinc-400">
           Building secure cloud architectures, containerized applications, and
           edge intelligence systems. Focused on writing clean, production-grade
           software that scales.
         </p>
 
         {/* CTA buttons */}
-        <div className="animate-fade-in-up animation-delay-300 mt-10 flex flex-wrap items-center justify-center gap-4">
+        <div className="animate-fade-in-up animation-delay-300 mt-10 flex flex-wrap items-center gap-4">
           <button
             onClick={() => scrollTo("flagship")}
-            className="group inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all duration-200 hover:-translate-y-0.5 hover:bg-indigo-500 hover:shadow-xl hover:shadow-indigo-500/30 dark:shadow-indigo-500/15 dark:hover:shadow-indigo-500/25"
+            className="group inline-flex items-center gap-2 rounded-lg bg-stone-900 px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-stone-800 dark:bg-teal-500 dark:text-zinc-950 dark:hover:bg-teal-400"
           >
             View Work
             <svg
@@ -63,19 +57,19 @@ export default function Hero() {
           </button>
           <button
             onClick={() => scrollTo("leadership")}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-700"
+            className="inline-flex items-center gap-2 rounded-lg border border-stone-300 px-6 py-3 text-sm font-semibold text-stone-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-stone-400 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-500"
           >
             Contact Me
           </button>
         </div>
 
         {/* Social links */}
-        <div className="animate-fade-in-up animation-delay-400 mt-8 flex items-center justify-center gap-4">
+        <div className="animate-fade-in-up animation-delay-400 mt-8 flex items-center gap-4">
           <a
             href="https://github.com/A-Ariyanto"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg p-2.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+            className="rounded-lg p-2.5 text-stone-400 transition-colors hover:text-stone-700 dark:text-zinc-500 dark:hover:text-zinc-300"
             aria-label="GitHub"
           >
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -86,7 +80,7 @@ export default function Hero() {
             href="https://www.linkedin.com/in/abdullah-ariyanto-19bb8525b/"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg p-2.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+            className="rounded-lg p-2.5 text-stone-400 transition-colors hover:text-stone-700 dark:text-zinc-500 dark:hover:text-zinc-300"
             aria-label="LinkedIn"
           >
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -98,8 +92,8 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="animate-fade-in animation-delay-600 absolute bottom-8 left-1/2 -translate-x-1/2">
-        <div className="flex h-8 w-5 items-start justify-center rounded-full border-2 border-slate-300 p-1 dark:border-slate-600">
-          <div className="h-1.5 w-1 animate-bounce rounded-full bg-slate-400 dark:bg-slate-500" />
+        <div className="flex h-8 w-5 items-start justify-center rounded-full border-2 border-stone-300 p-1 dark:border-zinc-700">
+          <div className="h-1.5 w-1 animate-bounce rounded-full bg-stone-400 dark:bg-zinc-500" />
         </div>
       </div>
     </section>
