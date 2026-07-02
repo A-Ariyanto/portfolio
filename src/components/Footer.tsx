@@ -13,7 +13,7 @@ export default function Footer() {
 
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com/abdullahariyanto"
+            href="https://github.com/A-Ariyanto"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200"
@@ -22,7 +22,7 @@ export default function Footer() {
           </a>
           <span className="text-slate-300 dark:text-slate-700">|</span>
           <a
-            href="https://linkedin.com/in/abdullahariyanto"
+            href="https://www.linkedin.com/in/abdullah-ariyanto-19bb8525b/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200"
@@ -32,5 +32,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
