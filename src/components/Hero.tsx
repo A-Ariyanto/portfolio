@@ -1,7 +1,7 @@
 export default function Hero() {
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-  }
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <section
@@ -21,7 +21,9 @@ export default function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
           </span>
-          <span className="text-slate-600 dark:text-slate-400">Open to opportunities</span>
+          <span className="text-slate-600 dark:text-slate-400">
+            Open to opportunities
+          </span>
         </div>
 
         <h1 className="animate-fade-in-up text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl md:text-6xl dark:text-white">
@@ -33,24 +35,34 @@ export default function Hero() {
         </p>
 
         <p className="animate-fade-in-up animation-delay-200 mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
-          Building secure cloud architectures, containerized applications,
-          and edge intelligence systems. Focused on writing clean,
-          production-grade software that scales.
+          Building secure cloud architectures, containerized applications, and
+          edge intelligence systems. Focused on writing clean, production-grade
+          software that scales.
         </p>
 
         {/* CTA buttons */}
         <div className="animate-fade-in-up animation-delay-300 mt-10 flex flex-wrap items-center justify-center gap-4">
           <button
-            onClick={() => scrollTo('flagship')}
+            onClick={() => scrollTo("flagship")}
             className="group inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all duration-200 hover:-translate-y-0.5 hover:bg-indigo-500 hover:shadow-xl hover:shadow-indigo-500/30 dark:shadow-indigo-500/15 dark:hover:shadow-indigo-500/25"
           >
             View Work
-            <svg className="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            <svg
+              className="h-4 w-4 transition-transform group-hover:translate-y-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              />
             </svg>
           </button>
           <button
-            onClick={() => scrollTo('leadership')}
+            onClick={() => scrollTo("leadership")}
             className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-700"
           >
             Contact Me
@@ -60,7 +72,7 @@ export default function Hero() {
         {/* Social links */}
         <div className="animate-fade-in-up animation-delay-400 mt-8 flex items-center justify-center gap-4">
           <a
-            href="https://github.com/abdullahariyanto"
+            href="https://github.com/A-Ariyanto"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg p-2.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200"
@@ -71,7 +83,7 @@ export default function Hero() {
             </svg>
           </a>
           <a
-            href="https://linkedin.com/in/abdullahariyanto"
+            href="https://www.linkedin.com/in/abdullah-ariyanto-19bb8525b/"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg p-2.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200"
@@ -91,5 +103,5 @@ export default function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }
