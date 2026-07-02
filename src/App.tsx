@@ -11,7 +11,7 @@ export default function App() {
   const { theme, toggleTheme } = useTheme()
 
   return (
-    <div className="min-h-screen bg-white transition-colors duration-300 dark:bg-slate-950">
+    <div className="min-h-screen bg-cream transition-colors duration-300 dark:bg-obsidian">
       <Navigation theme={theme} onToggleTheme={toggleTheme} />
       <main>
         <Hero />

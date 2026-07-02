@@ -26,11 +26,11 @@ export default function Navigation({ theme, onToggleTheme }: NavigationProps) {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-xl transition-colors duration-300 dark:border-slate-800 dark:bg-slate-950/80">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-stone-200 bg-cream/80 backdrop-blur-xl transition-colors duration-300 dark:border-zinc-800 dark:bg-obsidian/80">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <button
           onClick={() => scrollTo('hero')}
-          className="font-mono text-sm font-semibold tracking-tight text-slate-900 transition-colors hover:text-indigo-500 dark:text-slate-100 dark:hover:text-indigo-400"
+          className="font-mono text-sm font-semibold tracking-tight text-stone-900 transition-colors hover:text-green-700 dark:text-zinc-100 dark:hover:text-teal-400"
         >
           &lt;AA /&gt;
         </button>
@@ -43,17 +43,17 @@ export default function Navigation({ theme, onToggleTheme }: NavigationProps) {
               onClick={() => scrollTo(item.id)}
               className={`rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
                 activeId === item.id
-                  ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400'
-                  : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200'
+                  ? 'bg-stone-100 text-stone-900 dark:bg-zinc-800 dark:text-zinc-100'
+                  : 'text-stone-500 hover:bg-stone-100 hover:text-stone-900 dark:text-zinc-400 dark:hover:bg-zinc-800/50 dark:hover:text-zinc-200'
               }`}
             >
               {item.label}
             </button>
           ))}
-          <div className="ml-2 h-5 w-px bg-slate-200 dark:bg-slate-700" />
+          <div className="ml-2 h-5 w-px bg-stone-200 dark:bg-zinc-800" />
           <button
             onClick={onToggleTheme}
-            className="ml-2 rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+            className="ml-2 rounded-lg p-2 text-stone-500 transition-colors hover:bg-stone-100 hover:text-stone-700 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? (
@@ -72,7 +72,7 @@ export default function Navigation({ theme, onToggleTheme }: NavigationProps) {
         <div className="flex items-center gap-2 md:hidden">
           <button
             onClick={onToggleTheme}
-            className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
+            className="rounded-lg p-2 text-stone-500 transition-colors hover:bg-stone-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? (
@@ -87,7 +87,7 @@ export default function Navigation({ theme, onToggleTheme }: NavigationProps) {
           </button>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
+            className="rounded-lg p-2 text-stone-500 transition-colors hover:bg-stone-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
             aria-label="Toggle menu"
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -103,15 +103,15 @@ export default function Navigation({ theme, onToggleTheme }: NavigationProps) {
 
       {/* Mobile dropdown */}
       {mobileOpen && (
-        <div className="border-t border-slate-200 bg-white/95 px-6 py-3 backdrop-blur-xl md:hidden dark:border-slate-800 dark:bg-slate-950/95">
+        <div className="border-t border-stone-200 bg-cream/95 px-6 py-3 backdrop-blur-xl md:hidden dark:border-zinc-800 dark:bg-obsidian/95">
           {NAV_ITEMS.map(item => (
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}
               className={`block w-full rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-colors ${
                 activeId === item.id
-                  ? 'text-indigo-600 dark:text-indigo-400'
-                  : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
+                  ? 'text-stone-900 dark:text-zinc-100'
+                  : 'text-stone-500 hover:text-stone-900 dark:text-zinc-400 dark:hover:text-zinc-200'
               }`}
             >
               {item.label}

@@ -51,30 +51,30 @@ export default function Craftsmanship() {
   const { ref, inView } = useInView()
 
   return (
-    <section id="craftsmanship" className="px-6 py-24">
+    <section id="craftsmanship" className="border-t border-stone-200 px-6 py-24 dark:border-zinc-800">
       <div className="mx-auto max-w-6xl">
         <div
           ref={ref}
-          className={`overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white transition-all duration-700 dark:border-slate-800 dark:from-slate-900/80 dark:to-slate-900/40 ${
+          className={`overflow-hidden rounded-2xl border border-stone-200 bg-white transition-all duration-700 dark:border-zinc-800 dark:bg-zinc-900 ${
             inView ? 'animate-fade-in-up' : 'opacity-0'
           }`}
         >
           {/* Header accent bar */}
-          <div className="h-1 bg-gradient-to-r from-indigo-500 via-emerald-500 to-cyan-500" />
+          <div className="h-px bg-green-700 dark:bg-teal-500" />
 
           <div className="p-8 sm:p-12">
             {/* Section header */}
             <div className="mb-10">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 dark:border-indigo-500/20 dark:bg-indigo-500/10">
-                <svg className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-stone-200 bg-stone-50 px-3 py-1 dark:border-zinc-700 dark:bg-zinc-800">
+                <svg className="h-3.5 w-3.5 text-green-700 dark:text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                 </svg>
-                <span className="text-xs font-semibold text-indigo-700 dark:text-indigo-400">Engineering Philosophy</span>
+                <span className="text-xs font-semibold text-stone-700 dark:text-zinc-300">Engineering Philosophy</span>
               </div>
-              <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl dark:text-white">
+              <h2 className="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl dark:text-zinc-100">
                 Software Craftsmanship & Architectural Refactoring
               </h2>
-              <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">
+              <p className="mt-3 max-w-2xl text-stone-500 dark:text-zinc-400">
                 Building great software isn't just about writing new features — it's about transforming
                 existing systems into clean, testable, performant architectures through disciplined
                 engineering practices.
@@ -86,21 +86,21 @@ export default function Craftsmanship() {
               {JOURNEY_STEPS.map((step, i) => (
                 <div
                   key={step.phase}
-                  className={`group rounded-xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700 dark:bg-slate-800/50 dark:hover:border-slate-600 ${
+                  className={`group rounded-xl border border-stone-200 bg-stone-50 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-stone-300 dark:border-zinc-800 dark:bg-zinc-800/50 dark:hover:border-zinc-700 ${
                     inView ? 'animate-fade-in-up' : 'opacity-0'
                   }`}
                   style={{ animationDelay: `${200 + i * 100}ms` }}
                 >
                   <div className="mb-4 flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 transition-colors group-hover:bg-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-400">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-stone-200/60 text-stone-600 dark:bg-zinc-700 dark:text-zinc-400">
                       {step.icon}
                     </div>
-                    <span className="font-mono text-xs font-bold text-slate-400 dark:text-slate-500">
+                    <span className="font-mono text-xs font-bold text-stone-400 dark:text-zinc-600">
                       PHASE {step.phase}
                     </span>
                   </div>
-                  <h3 className="mb-2 font-semibold text-slate-900 dark:text-white">{step.title}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                  <h3 className="mb-2 font-semibold text-stone-900 dark:text-zinc-100">{step.title}</h3>
+                  <p className="text-sm leading-relaxed text-stone-500 dark:text-zinc-400">
                     {step.description}
                   </p>
                 </div>
