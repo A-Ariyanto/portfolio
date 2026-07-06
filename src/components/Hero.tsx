@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section id="hero" className="flex min-h-screen items-center px-6">
       {/* Hero content */}
-      <div className="flex w-full max-w-6xl flex-col items-center gap-12 lg:flex-row lg:justify-between m-20">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-12 lg:flex-row lg:justify-between">
         <div className="max-w-xl pt-12 sm:pt-0 lg:max-w-2xl mt-12">
           <h1 className="animate-fade-in-up text-4xl font-bold tracking-tight text-stone-900 sm:text-5xl md:text-6xl lg:text-7xl dark:text-zinc-50">
             Abdullah Ariyanto
@@ -25,7 +25,7 @@ export default function Hero() {
           {/* CTA buttons */}
           <div className="animate-fade-in-up animation-delay-300 mt-10 flex flex-wrap items-center gap-4">
             <button
-              onClick={() => scrollTo("flagship")}
+              onClick={() => scrollTo("projects")}
               className="group inline-flex items-center gap-2 rounded-lg bg-stone-900 px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-stone-800 dark:bg-teal-500 dark:text-zinc-950 dark:hover:bg-teal-400"
             >
               View Work
