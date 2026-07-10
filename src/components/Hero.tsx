@@ -12,7 +12,7 @@ export default function Hero() {
             Abdullah Ariyanto
           </h1>
 
-          <p className="animate-fade-in-up animation-delay-100 mt-3 font-mono text-lg font-medium text-green-700 sm:text-xl dark:text-teal-400">
+          <p className="animate-fade-in-up animation-delay-100 mt-3 font-mono text-lg font-medium text-green-700 sm:text-xl dark:text-tcaneal-400">
             Full-Stack Software Engineer
           </p>
 
@@ -65,7 +65,7 @@ export default function Hero() {
               </svg>
             </a>
             <a
-              href="https://www.linkedin.com/in/abdullah-ariyanto-19bb8525b/"
+              href="https://www.linkedin.com/in/abdullah-ariyanto/"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-lg p-2.5 text-stone-400 transition-colors hover:text-stone-700 dark:text-zinc-500 dark:hover:text-zinc-300"
