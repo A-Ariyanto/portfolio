@@ -17,8 +17,8 @@ export default function Hero() {
           </p>
 
           <p className="animate-fade-in-up animation-delay-200 mt-6 text-lg leading-relaxed text-stone-500 dark:text-zinc-400">
-            Building secure cloud architectures, containerized applications, and
-            edge intelligence systems. Focused on writing clean,
+            Building containerized full-stack applications and practical
+            machine learning systems. Focused on writing clean,
             production-grade software that scales.
           </p>
 
@@ -44,7 +44,7 @@ export default function Hero() {
               </svg>
             </button>
             <button
-              onClick={() => scrollTo("leadership")}
+              onClick={() => scrollTo("contact")}
               className="inline-flex items-center gap-2 rounded-lg border border-stone-300 px-6 py-3 text-sm font-semibold text-stone-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-stone-400 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-500"
             >
               Contact Me
@@ -65,7 +65,7 @@ export default function Hero() {
               </svg>
             </a>
             <a
-              href="https://www.linkedin.com/in/abdullah-ariyanto-19bb8525b/"
+              href="https://www.linkedin.com/in/abdullah-ariyanto/"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-lg p-2.5 text-stone-400 transition-colors hover:text-stone-700 dark:text-zinc-500 dark:hover:text-zinc-300"

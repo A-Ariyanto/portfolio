@@ -6,6 +6,7 @@ const NAV_ITEMS = [
   { id: 'projects', label: 'Projects' },
   { id: 'craftsmanship', label: 'Craftsmanship' },
   { id: 'leadership', label: 'Leadership' },
+  { id: 'contact', label: 'Contact' },
 ]
 
 const SECTION_IDS = NAV_ITEMS.map(item => item.id)

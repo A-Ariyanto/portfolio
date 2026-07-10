@@ -22,7 +22,7 @@ export default function Footer() {
           </a>
           <span className="text-stone-300 dark:text-zinc-700">|</span>
           <a
-            href="https://www.linkedin.com/in/abdullah-ariyanto-19bb8525b/"
+            href="https://www.linkedin.com/in/abdullah-ariyanto/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-stone-500 transition-colors hover:text-stone-900 dark:text-zinc-500 dark:hover:text-zinc-200"
