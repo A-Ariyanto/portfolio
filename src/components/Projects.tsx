@@ -10,9 +10,19 @@ interface ProjectTab {
   content: React.ReactNode
 }
 
+type CategoryId = 'fullstack' | 'ai'
+
+// To add a category (e.g. Security): extend CategoryId, add an entry here,
+// and tag projects with the new id — the tab and filtering come for free.
+const CATEGORIES: { id: CategoryId; label: string }[] = [
+  { id: 'fullstack', label: 'Full-Stack' },
+  { id: 'ai', label: 'AI & Machine Learning' },
+]
+
 interface Project {
   title: string
   subtitle: string
+  category: CategoryId
   tags: string[]
   tabs: ProjectTab[]
   videoUrl?: string
@@ -23,10 +33,10 @@ const TAG_CLASSES = 'rounded-md border border-stone-200 bg-stone-100 px-2.5 py-1
 
 const PROJECTS: Project[] = [
   {
-    title: 'Task Breakdown App',
-    subtitle: 'AI-Powered Task Orchestration Platform',
-    tags: ['React', 'Firebase', 'Azure', 'GPT API'],
-    starred: true,
+    title: 'AuraList',
+    subtitle: 'AI Task Breakdown & Planning App — In Development',
+    category: 'fullstack',
+    tags: ['React', 'Express', 'Gemini API', 'Google OAuth'],
     tabs: [
       {
         id: 'overview',
@@ -34,12 +44,13 @@ const PROJECTS: Project[] = [
         content: (
           <div className="space-y-4">
             <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
-              A full-stack AI-powered application that intelligently decomposes complex tasks into
-              actionable subtasks. Built with a split-infrastructure approach separating the client
-              hosting layer from the secure AI orchestration backend.
+              Describe a big goal in chat and the AI breaks it into an actionable checklist, then
+              track the steps on a to-do list or drag-and-drop kanban board and export them to
+              Google Calendar and Google Tasks. Initial dev version complete; actively developing
+              toward release.
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {['React + TypeScript', 'Firebase Hosting', 'Azure App Service', 'OpenAI GPT API', 'JWT Auth', 'REST API'].map(item => (
+              {['React 19 + Vite', 'Tailwind CSS 4', 'Express (Node.js)', 'Google Gemini API', 'OAuth 2.0', 'Calendar & Tasks APIs'].map(item => (
                 <div key={item} className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-xs font-medium text-stone-600 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
                   {item}
                 </div>
@@ -54,15 +65,15 @@ const PROJECTS: Project[] = [
         content: (
           <div className="space-y-4">
             <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
-              Deliberately split across two cloud providers: Firebase handles static hosting and
-              client-side auth, while Azure App Service runs the secured Python backend that
-              interfaces with the GPT API. This isolation ensures API keys never touch the client.
+              Three views — AI chat, to-do list, and kanban board — share one task store persisted
+              client-side in localStorage. Google sign-in happens entirely client-side in a popup,
+              while the Gemini API key stays server-side behind an Express backend.
             </p>
             <div className="rounded-lg border border-stone-200 bg-stone-50 p-4 font-mono text-xs dark:border-zinc-700 dark:bg-zinc-800/50">
               <div className="space-y-2 text-stone-500 dark:text-zinc-500">
-                <p><span className="font-semibold text-stone-800 dark:text-zinc-200">Client</span> (Firebase) &rarr; JWT Token &rarr; <span className="font-semibold text-green-700 dark:text-teal-400">Backend</span> (Azure)</p>
-                <p><span className="font-semibold text-green-700 dark:text-teal-400">Backend</span> verifies JWT &rarr; calls GPT API &rarr; returns structured response</p>
-                <p><span className="font-semibold text-amber-700 dark:text-amber-400">Firebase Auth</span> issues tokens &rarr; Backend validates with Firebase Admin SDK</p>
+                <p><span className="font-semibold text-stone-800 dark:text-zinc-200">Chat UI</span> &rarr; Express backend &rarr; <span className="font-semibold text-green-700 dark:text-teal-400">Gemini API</span> (key server-side)</p>
+                <p><span className="font-semibold text-green-700 dark:text-teal-400">OAuth popup</span> &rarr; token stays in browser &rarr; <span className="font-semibold text-amber-700 dark:text-amber-400">Calendar &amp; Tasks APIs</span></p>
+                <p><span className="font-semibold text-amber-700 dark:text-amber-400">Task store</span> &rarr; localStorage &rarr; <span className="font-semibold text-stone-800 dark:text-zinc-200">To-do / Kanban views</span></p>
               </div>
             </div>
           </div>
@@ -75,16 +86,16 @@ const PROJECTS: Project[] = [
           <div className="space-y-3">
             {[
               {
-                title: 'JWT Handshake Verification',
-                desc: 'Implemented a cross-provider authentication flow where Firebase-issued JWTs are verified server-side by the Azure backend using the Firebase Admin SDK, establishing a zero-trust boundary between client and API.',
+                title: 'Client-Side OAuth Boundary',
+                desc: 'Google sign-in runs entirely client-side in a popup via Google Identity Services — the access token never leaves the browser and no Google credentials ever touch the backend.',
               },
               {
-                title: 'API Key Security',
-                desc: 'Ensured OpenAI API credentials never reach the client by routing all AI calls through the Azure backend, with environment-variable injection and request-rate limiting.',
+                title: 'Gemini Key Isolation',
+                desc: 'All AI calls route through the Express backend so the Gemini API key stays in a gitignored server-side .env, never shipped to the client bundle.',
               },
               {
-                title: 'Split Infrastructure Coordination',
-                desc: 'Managed CI/CD across two separate cloud platforms — Firebase deploy for frontend, Azure App Service deploy for backend — while maintaining version compatibility.',
+                title: 'One Task Store, Three Views',
+                desc: 'AI chat, to-do list, and drag-and-drop kanban board all read and write a single shared task store, keeping state consistent across views and Google export actions.',
               },
             ].map(item => (
               <div key={item.title} className="rounded-lg border border-stone-200 p-4 dark:border-zinc-800">
@@ -100,6 +111,7 @@ const PROJECTS: Project[] = [
   {
     title: 'POS & Inventory System',
     subtitle: 'Containerized Point-of-Sale Platform',
+    category: 'fullstack',
     tags: ['Django', 'Docker', 'PostgreSQL', 'React'],
     starred: true,
     tabs: [
@@ -109,12 +121,13 @@ const PROJECTS: Project[] = [
         content: (
           <div className="space-y-4">
             <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
-              An enterprise-grade point-of-sale and inventory management system built with a
-              multi-container Docker Compose architecture. Features real-time inventory tracking,
-              transaction processing, and a clean API contract between frontend and backend services.
+              A containerized POS dashboard for managing sales categories, inventory, real-time
+              checkout, and sales analytics, built on a multi-container Docker Compose architecture
+              with a GitHub Actions pipeline running integration tests on changes. Currently
+              resolving local bugs, with GCP deployment as the next milestone.
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {['Django REST', 'React Frontend', 'PostgreSQL', 'Docker Compose', 'Nginx Proxy', 'Gunicorn'].map(item => (
+              {['Django REST', 'React Frontend', 'PostgreSQL', 'Docker Compose', 'Nginx Proxy', 'GitHub Actions'].map(item => (
                 <div key={item} className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-xs font-medium text-stone-600 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
                   {item}
                 </div>
@@ -129,13 +142,13 @@ const PROJECTS: Project[] = [
         content: (
           <div className="space-y-4">
             <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
-              Multi-container orchestration via Docker Compose. Nginx handles reverse proxying and
-              static asset serving, Gunicorn manages Django worker processes, and PostgreSQL runs as
-              an isolated data layer with persistent volumes.
+              Multi-container orchestration via Docker Compose. A multi-stage build compiles the
+              frontend and serves it via Nginx as a reverse proxy, Django runs over WSGI, and
+              PostgreSQL runs as an isolated data layer with persistent volumes.
             </p>
             <div className="rounded-lg border border-stone-200 bg-stone-50 p-4 font-mono text-xs dark:border-zinc-700 dark:bg-zinc-800/50">
               <div className="space-y-2 text-stone-500 dark:text-zinc-500">
-                <p><span className="font-semibold text-stone-800 dark:text-zinc-200">Nginx</span> :80 &rarr; proxy_pass &rarr; <span className="font-semibold text-green-700 dark:text-teal-400">Gunicorn</span> :8000</p>
+                <p><span className="font-semibold text-stone-800 dark:text-zinc-200">Nginx</span> :80 &rarr; proxy_pass &rarr; <span className="font-semibold text-green-700 dark:text-teal-400">Django (WSGI)</span> :8000</p>
                 <p><span className="font-semibold text-green-700 dark:text-teal-400">Django</span> &harr; <span className="font-semibold text-amber-700 dark:text-amber-400">PostgreSQL</span> :5432 (persistent volume)</p>
                 <p><span className="font-semibold text-stone-800 dark:text-zinc-200">React</span> &rarr; DRF REST API &rarr; serialized JSON responses</p>
               </div>
@@ -154,12 +167,12 @@ const PROJECTS: Project[] = [
                 desc: 'Solved inventory race conditions during simultaneous transactions using Django\'s select_for_update() with row-level locking and atomic transaction blocks to guarantee data consistency.',
               },
               {
-                title: 'DRF API Contract Design',
-                desc: 'Designed a strict, versioned REST API contract using Django REST Framework serializers, ensuring frontend-backend decoupling and enabling independent deployment cycles.',
+                title: 'Per-Environment Settings Isolation',
+                desc: 'Split Django settings into base, development, testing, uat, and production modules, keeping secrets and configuration isolated per environment.',
               },
               {
                 title: 'Multi-Container Orchestration',
-                desc: 'Configured Docker Compose networking, health checks, and startup ordering to ensure PostgreSQL is ready before Django attempts migrations, preventing cold-start failures.',
+                desc: 'Configured Docker Compose networking, volumes, and environment variables so the Nginx-served frontend, Django backend, and PostgreSQL run as isolated, reproducible services.',
               },
             ].map(item => (
               <div key={item.title} className="rounded-lg border border-stone-200 p-4 dark:border-zinc-800">
@@ -173,9 +186,10 @@ const PROJECTS: Project[] = [
     ],
   },
   {
-    title: 'Drone Search & Rescue',
-    subtitle: 'Edge AI Real-Time Detection System',
-    tags: ['Python', 'YOLO', 'ONNX', 'Raspberry Pi'],
+    title: 'License Plate Detection & Reading',
+    subtitle: 'YOLO26 + OCR Pipeline — Ongoing ML Project',
+    category: 'ai',
+    tags: ['Python', 'YOLO26', 'EasyOCR', 'OpenCV'],
     tabs: [
       {
         id: 'overview',
@@ -183,12 +197,13 @@ const PROJECTS: Project[] = [
         content: (
           <div className="space-y-4">
             <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
-              Edge AI prototype for real-time human detection on resource-constrained drone hardware.
-              Optimized inference pipeline for sub-second detection at altitude with minimal power
-              draw on ARM processors.
+              A two-stage computer vision pipeline: a fine-tuned YOLO26-nano model detects license
+              plates, crops them, and EasyOCR reads the plate text. Reached 0.953 precision, 0.917
+              recall, and 0.961 mAP50 on a 2,048-image validation set — after just 10 epochs of
+              fine-tuning, with ~3 ms/image inference on a T4.
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {['Python', 'YOLOv8', 'ONNX Runtime', 'Raspberry Pi', 'OpenCV', 'Edge AI'].map(item => (
+              {['Ultralytics YOLO26', 'EasyOCR', 'OpenCV', 'Roboflow', 'Google Colab (T4)', 'Python'].map(item => (
                 <div key={item} className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-xs font-medium text-stone-600 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
                   {item}
                 </div>
@@ -203,15 +218,16 @@ const PROJECTS: Project[] = [
         content: (
           <div className="space-y-4">
             <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
-              A lightweight inference pipeline running entirely on-device. Camera frames are
-              preprocessed, fed through an ONNX-optimized YOLO model, and results are filtered
-              with confidence thresholding — all within a thermal budget safe for sustained flight.
+              An end-to-end pipeline: the License Plate Recognition dataset is downloaded
+              programmatically from Roboflow Universe, a pretrained YOLO26-nano is fine-tuned at
+              640&times;640 with early stopping, then two-stage inference detects plates, crops
+              them, and reads the text with an alphanumeric OCR allowlist.
             </p>
             <div className="rounded-lg border border-stone-200 bg-stone-50 p-4 font-mono text-xs dark:border-zinc-700 dark:bg-zinc-800/50">
               <div className="space-y-2 text-stone-500 dark:text-zinc-500">
-                <p><span className="font-semibold text-stone-800 dark:text-zinc-200">Camera</span> &rarr; frame capture &rarr; <span className="font-semibold text-green-700 dark:text-teal-400">Preprocessing</span> (resize, normalize)</p>
-                <p><span className="font-semibold text-green-700 dark:text-teal-400">ONNX Runtime</span> &rarr; YOLOv8 inference &rarr; <span className="font-semibold text-amber-700 dark:text-amber-400">NMS filtering</span></p>
-                <p><span className="font-semibold text-amber-700 dark:text-amber-400">Detections</span> &rarr; confidence threshold &rarr; <span className="font-semibold text-stone-800 dark:text-zinc-200">Alert output</span></p>
+                <p><span className="font-semibold text-stone-800 dark:text-zinc-200">Roboflow dataset</span> &rarr; fine-tune &rarr; <span className="font-semibold text-green-700 dark:text-teal-400">YOLO26-nano</span> (640&times;640, early stopping)</p>
+                <p><span className="font-semibold text-green-700 dark:text-teal-400">Detect plates</span> &rarr; crop &rarr; <span className="font-semibold text-amber-700 dark:text-amber-400">EasyOCR</span> (alphanumeric allowlist)</p>
+                <p><span className="font-semibold text-amber-700 dark:text-amber-400">Plate text</span> &rarr; annotate &rarr; <span className="font-semibold text-stone-800 dark:text-zinc-200">Saved outputs</span></p>
               </div>
             </div>
           </div>
@@ -224,16 +240,93 @@ const PROJECTS: Project[] = [
           <div className="space-y-3">
             {[
               {
-                title: 'ONNX Runtime Optimization',
-                desc: 'Converted YOLO model to ONNX format with quantization to achieve sub-200ms inference on ARM hardware without GPU acceleration.',
+                title: 'Documented Test Cycles',
+                desc: 'Each run is recorded in the README with results, failure analysis — e.g. a 2:1-wide image shrinking the plate to ~60px at 640 inference resolution, causing a missed detection — and concrete hypotheses for the next cycle.',
               },
               {
-                title: 'Thermal Management',
-                desc: 'Custom frame-skipping algorithm that dynamically adjusts inference frequency based on Raspberry Pi CPU temperature to prevent thermal throttling during sustained flight.',
+                title: 'Secrets Hygiene',
+                desc: 'Roboflow API key kept in a gitignored .env locally and Colab Secrets on GPU runs, with an .env.example template for reproducibility.',
               },
               {
-                title: 'Edge Inference Pipeline',
-                desc: 'Built an end-to-end detection pipeline that runs entirely on-device with no cloud dependency, achieving real-time performance under severe resource constraints.',
+                title: 'OCR on Hard Crops',
+                desc: 'Detection is solid; remaining errors are character misreads on small or dark crops. Next cycle: inference at 1280px for wide images, plus upscaling and contrast-boosting plate crops before OCR.',
+              },
+            ].map(item => (
+              <div key={item.title} className="rounded-lg border border-stone-200 p-4 dark:border-zinc-800">
+                <h4 className="mb-1 text-sm font-semibold text-stone-900 dark:text-zinc-100">{item.title}</h4>
+                <p className="text-sm leading-relaxed text-stone-600 dark:text-zinc-400">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    title: 'Presto — Slide Deck Web App',
+    subtitle: 'Full-Stack Presentation Editor (COMP6080)',
+    category: 'fullstack',
+    tags: ['React', 'TypeScript', 'Express', 'Vercel KV'],
+    tabs: [
+      {
+        id: 'overview',
+        label: 'Overview',
+        content: (
+          <div className="space-y-4">
+            <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
+              A lightweight slides.com alternative: a full single-page presentation editor with
+              registration/login, a dashboard, and a slide editor supporting text, images, video,
+              and syntax-highlighted code blocks — with slide re-ordering, theming, and preview
+              mode. Deployed end-to-end on Vercel.
+            </p>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {['React 19 + Vite', 'TypeScript', 'Tailwind CSS', 'Express (Node.js)', 'Vercel KV (Redis)', 'Cypress + Vitest'].map(item => (
+                <div key={item} className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-xs font-medium text-stone-600 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        ),
+      },
+      {
+        id: 'architecture',
+        label: 'Architecture',
+        content: (
+          <div className="space-y-4">
+            <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
+              Both the React frontend and the Express backend deploy to Vercel, with presentation
+              state persisted in Vercel KV (Redis) and stateless JWT-based session handling. Every
+              merge passed a documented quality gate of lint, type-check, and a Cypress E2E
+              regression suite.
+            </p>
+            <div className="rounded-lg border border-stone-200 bg-stone-50 p-4 font-mono text-xs dark:border-zinc-700 dark:bg-zinc-800/50">
+              <div className="space-y-2 text-stone-500 dark:text-zinc-500">
+                <p><span className="font-semibold text-stone-800 dark:text-zinc-200">React SPA</span> &rarr; JWT auth &rarr; <span className="font-semibold text-green-700 dark:text-teal-400">Express API</span> (Vercel)</p>
+                <p><span className="font-semibold text-green-700 dark:text-teal-400">Express</span> &rarr; presentation state &rarr; <span className="font-semibold text-amber-700 dark:text-amber-400">Vercel KV</span> (Redis)</p>
+                <p><span className="font-semibold text-amber-700 dark:text-amber-400">Merge gate</span> &rarr; lint + tsc + Cypress E2E &rarr; <span className="font-semibold text-stone-800 dark:text-zinc-200">Deploy</span></p>
+              </div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        id: 'challenges',
+        label: 'Challenges Solved',
+        content: (
+          <div className="space-y-3">
+            {[
+              {
+                title: 'Documented Quality Gate',
+                desc: 'Lint, type-check, and a Cypress E2E regression suite (auth happy-path baseline) all passing before merges, with a written testing audit trail mapping specs to requirements.',
+              },
+              {
+                title: 'Accessibility & UX Standards',
+                desc: 'Held the UI to explicit WCAG-style criteria documented per feature — no browser alert()s; all feedback surfaced through proper UI components.',
+              },
+              {
+                title: 'Hard Responsive Requirement',
+                desc: 'Responsive down to a 400×700 viewport as a hard requirement, verified feature by feature.',
               },
             ].map(item => (
               <div key={item.title} className="rounded-lg border border-stone-200 p-4 dark:border-zinc-800">
@@ -249,7 +342,8 @@ const PROJECTS: Project[] = [
   {
     title: 'Productivity Chrome Extension',
     subtitle: 'Privacy-First Browser Productivity Tool',
-    tags: ['JavaScript', 'Manifest V3', 'Chrome APIs'],
+    category: 'fullstack',
+    tags: ['React', 'Tailwind CSS', 'Manifest V3'],
     tabs: [
       {
         id: 'overview',
@@ -257,12 +351,12 @@ const PROJECTS: Project[] = [
         content: (
           <div className="space-y-4">
             <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
-              Privacy-first browser extension for productivity tracking. All data stays client-side
-              with zero network calls — built on Manifest V3 architecture with modern service worker
-              patterns.
+              A privacy-first workspace extension with modular Pomodoro timers, local-first
+              analytics charts, and real-time site blocking. All data stays client-side with zero
+              network calls. In closed beta with 5+ users; planning a public release.
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {['JavaScript', 'Manifest V3', 'Service Workers', 'Chrome Storage', 'Chrome APIs', 'CSS3'].map(item => (
+              {['React', 'Tailwind CSS', 'Manifest V3', 'Service Workers', 'chrome.storage.local', 'Chrome APIs'].map(item => (
                 <div key={item} className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-xs font-medium text-stone-600 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
                   {item}
                 </div>
@@ -278,8 +372,8 @@ const PROJECTS: Project[] = [
           <div className="space-y-4">
             <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
               Built on Chrome's Manifest V3 with a service worker background script handling event
-              listeners and state management. All persistence uses chrome.storage.local — zero
-              external dependencies, zero network requests.
+              listeners and state management. All persistence uses chrome.storage.local — no
+              external servers, zero network requests.
             </p>
             <div className="rounded-lg border border-stone-200 bg-stone-50 p-4 font-mono text-xs dark:border-zinc-700 dark:bg-zinc-800/50">
               <div className="space-y-2 text-stone-500 dark:text-zinc-500">
@@ -306,8 +400,8 @@ const PROJECTS: Project[] = [
                 desc: 'Designed all data persistence around chrome.storage.local with zero external dependencies or network requests, ensuring complete user privacy by default.',
               },
               {
-                title: 'Zero-Dependency Architecture',
-                desc: 'Built the entire extension without external libraries — pure JavaScript, CSS, and Chrome APIs — keeping the extension lightweight and audit-friendly.',
+                title: 'Minimal Background Footprint',
+                desc: 'Core scheduled jobs run as event-driven Manifest V3 service workers, keeping background RAM usage minimal and complying with Chrome\'s modern sandboxing constraints.',
               },
             ].map(item => (
               <div key={item.title} className="rounded-lg border border-stone-200 p-4 dark:border-zinc-800">
@@ -321,9 +415,10 @@ const PROJECTS: Project[] = [
     ],
   },
   {
-    title: 'QR Attendance Tracker',
-    subtitle: 'Serverless Event Management System',
-    tags: ['Azure Functions', 'PostgreSQL', 'Serverless'],
+    title: 'Air Pollution Forecasting',
+    subtitle: 'Urban Air Quality ML System (COMP9417) — High Distinction',
+    category: 'ai',
+    tags: ['Python', 'scikit-learn', 'XGBoost', 'Pandas'],
     tabs: [
       {
         id: 'overview',
@@ -331,12 +426,12 @@ const PROJECTS: Project[] = [
         content: (
           <div className="space-y-4">
             <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
-              Serverless event attendance system built on Azure Functions with high-throughput QR
-              code scanning and PostgreSQL-backed analytics. Scales to zero when idle and handles
-              burst traffic during event check-ins.
+              A group ML system forecasting urban pollutant levels one hour ahead from 9,358 hourly
+              road-level sensor readings (UCI Air Quality dataset) — CO, NOx, NO₂, and benzene. I
+              built the regression pipeline; the project received a High Distinction.
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {['Azure Functions', 'PostgreSQL', 'QR Generation', 'Serverless', 'REST API', 'Analytics'].map(item => (
+              {['Python', 'scikit-learn', 'XGBoost', 'Pandas', 'UCI Air Quality', 'Team of 4'].map(item => (
                 <div key={item} className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-xs font-medium text-stone-600 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
                   {item}
                 </div>
@@ -351,15 +446,16 @@ const PROJECTS: Project[] = [
         content: (
           <div className="space-y-4">
             <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
-              HTTP-triggered Azure Functions handle QR code generation and scan validation.
-              PostgreSQL stores attendee records with relational indexing for fast aggregate queries
-              and real-time attendance dashboards.
+              Missing readings arrive encoded as −200; they are treated as nulls and imputed during
+              preprocessing. My regression pipeline predicts t+1 concentrations for all four
+              pollutants; the broader system adds CO band classification (Low/Mid/High) and
+              residual-based anomaly detection.
             </p>
             <div className="rounded-lg border border-stone-200 bg-stone-50 p-4 font-mono text-xs dark:border-zinc-700 dark:bg-zinc-800/50">
               <div className="space-y-2 text-stone-500 dark:text-zinc-500">
-                <p><span className="font-semibold text-stone-800 dark:text-zinc-200">QR Scan</span> &rarr; HTTP trigger &rarr; <span className="font-semibold text-green-700 dark:text-teal-400">Azure Function</span></p>
-                <p><span className="font-semibold text-green-700 dark:text-teal-400">Function</span> &rarr; validate &amp; record &rarr; <span className="font-semibold text-amber-700 dark:text-amber-400">PostgreSQL</span></p>
-                <p><span className="font-semibold text-amber-700 dark:text-amber-400">Database</span> &rarr; indexed queries &rarr; <span className="font-semibold text-stone-800 dark:text-zinc-200">Analytics dashboard</span></p>
+                <p><span className="font-semibold text-stone-800 dark:text-zinc-200">Sensor data</span> &rarr; impute −200 nulls &rarr; <span className="font-semibold text-green-700 dark:text-teal-400">Preprocessing</span></p>
+                <p><span className="font-semibold text-green-700 dark:text-teal-400">Linear / RF / XGBoost</span> &rarr; RMSE benchmark &rarr; <span className="font-semibold text-amber-700 dark:text-amber-400">XGBoost</span> (best on all 4)</p>
+                <p><span className="font-semibold text-amber-700 dark:text-amber-400">Residuals</span> &rarr; 99th percentile threshold &rarr; <span className="font-semibold text-stone-800 dark:text-zinc-200">Anomaly flags</span></p>
               </div>
             </div>
           </div>
@@ -372,16 +468,94 @@ const PROJECTS: Project[] = [
           <div className="space-y-3">
             {[
               {
-                title: 'Cold Start Optimization',
-                desc: 'Minimized Azure Functions cold start latency through lightweight function design and connection pooling to PostgreSQL, ensuring responsive QR scan validation even after idle periods.',
+                title: 'Model Benchmarking',
+                desc: 'Benchmarked Linear Regression against ensemble methods (Random Forest, XGBoost) using RMSE as the primary metric — XGBoost was the best performer across all four pollutants.',
               },
               {
-                title: 'Concurrent Scan Processing',
-                desc: 'Handled burst traffic during event check-ins where hundreds of attendees scan simultaneously, using connection pooling and optimistic concurrency control.',
+                title: 'Messy Sensor Data',
+                desc: 'Missing readings were encoded as −200 rather than null; treated as nulls and imputed during preprocessing before any modelling.',
               },
               {
-                title: 'Relational Query Performance',
-                desc: 'Designed PostgreSQL schema with composite indexes and materialized views for real-time attendance analytics without impacting scan-processing throughput.',
+                title: 'Anomaly Detection',
+                desc: 'Residual-based method flagging deviations beyond the 99th percentile of absolute residuals — separating sensor faults and pollution spikes from normal variation.',
+              },
+            ].map(item => (
+              <div key={item.title} className="rounded-lg border border-stone-200 p-4 dark:border-zinc-800">
+                <h4 className="mb-1 text-sm font-semibold text-stone-900 dark:text-zinc-100">{item.title}</h4>
+                <p className="text-sm leading-relaxed text-stone-600 dark:text-zinc-400">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    title: 'Vehicle Insurance Risk Modelling',
+    subtitle: 'End-to-End ML Pipeline (COMP9321)',
+    category: 'ai',
+    tags: ['Python', 'LightGBM', 'XGBoost', 'scikit-learn'],
+    tabs: [
+      {
+        id: 'overview',
+        label: 'Overview',
+        content: (
+          <div className="space-y-4">
+            <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
+              From 40,194 labelled policies (33 raw columns), predicts a continuous vehicle safety
+              rating (regression) and whether a policyholder will lodge a claim (classification
+              with a severe ~94/6 class imbalance). The full pipeline runs in about a minute on a
+              laptop CPU.
+            </p>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {['pandas', 'scikit-learn', 'LightGBM', 'XGBoost', '7-Model Ensemble', 'Leakage-Safe Prep'].map(item => (
+                <div key={item} className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-xs font-medium text-stone-600 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        ),
+      },
+      {
+        id: 'architecture',
+        label: 'Architecture',
+        content: (
+          <div className="space-y-4">
+            <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
+              Messy string columns are parsed into numeric features ("91Nm@4250rpm" becomes torque
+              + RPM) and a stringified vehicle-features list expands into 17 binary safety flags,
+              plus domain ratios and log transforms. Regression uses a weighted ensemble of four
+              gradient-boosted regressors; classification feeds the predicted safety rating in as
+              an extra feature, with three classifiers voting by averaged probability.
+            </p>
+            <div className="rounded-lg border border-stone-200 bg-stone-50 p-4 font-mono text-xs dark:border-zinc-700 dark:bg-zinc-800/50">
+              <div className="space-y-2 text-stone-500 dark:text-zinc-500">
+                <p><span className="font-semibold text-stone-800 dark:text-zinc-200">Raw strings</span> &rarr; parse &amp; engineer &rarr; <span className="font-semibold text-green-700 dark:text-teal-400">Features</span> (+17 safety flags)</p>
+                <p><span className="font-semibold text-green-700 dark:text-teal-400">4 GB regressors</span> &rarr; weighted ensemble &rarr; <span className="font-semibold text-amber-700 dark:text-amber-400">Safety rating</span></p>
+                <p><span className="font-semibold text-amber-700 dark:text-amber-400">Rating as feature</span> &rarr; 3 classifiers &rarr; <span className="font-semibold text-stone-800 dark:text-zinc-200">Averaged-probability vote</span></p>
+              </div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        id: 'challenges',
+        label: 'Challenges Solved',
+        content: (
+          <div className="space-y-3">
+            {[
+              {
+                title: 'Leakage-Safe Preprocessing',
+                desc: 'A single preprocess() applied independently to train and test: medians imputed from training data only, unseen categories mapped to −1 instead of crashing — no target information ever crosses over.',
+              },
+              {
+                title: 'Severe Class Imbalance',
+                desc: 'The ~94/6 claim imbalance is handled at the algorithm level (class_weight=\'balanced\' / scale_pos_weight), avoiding the leakage risks of oversampling.',
+              },
+              {
+                title: 'Tuning vs. Feature Engineering',
+                desc: 'RandomizedSearchCV hyperparameter tuning bought almost nothing over baselines on an 80/20 validation split — which motivated investing in feature engineering and multi-model ensembling instead.',
               },
             ].map(item => (
               <div key={item.title} className="rounded-lg border border-stone-200 p-4 dark:border-zinc-800">
@@ -395,12 +569,6 @@ const PROJECTS: Project[] = [
     ],
   },
 ]
-
-const sortedProjects = [...PROJECTS].sort((a, b) => {
-  if (a.starred && !b.starred) return -1
-  if (!a.starred && b.starred) return 1
-  return 0
-})
 
 function ProjectCard({ project }: { project: Project }) {
   const [activeTab, setActiveTab] = useState<TabId>('overview')
@@ -493,6 +661,18 @@ function ProjectCard({ project }: { project: Project }) {
 
 export default function Projects() {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const [activeCategory, setActiveCategory] = useState<CategoryId>(CATEGORIES[0].id)
+
+  const visibleProjects = PROJECTS.filter(p => p.category === activeCategory).sort((a, b) => {
+    if (a.starred && !b.starred) return -1
+    if (!a.starred && b.starred) return 1
+    return 0
+  })
+
+  const selectCategory = (id: CategoryId) => {
+    setActiveCategory(id)
+    scrollRef.current?.scrollTo({ left: 0 })
+  }
 
   const scroll = (direction: 'left' | 'right') => {
     if (!scrollRef.current) return
@@ -541,13 +721,31 @@ export default function Projects() {
             </button>
           </div>
         </div>
+
+        <div className="mb-10 flex justify-center sm:justify-start">
+          <div className="flex gap-1 rounded-lg border border-stone-200 bg-stone-50 p-1 dark:border-zinc-800 dark:bg-zinc-800/50">
+            {CATEGORIES.map(cat => (
+              <button
+                key={cat.id}
+                onClick={() => selectCategory(cat.id)}
+                className={`rounded-md px-4 py-2 text-sm font-medium transition-all ${
+                  activeCategory === cat.id
+                    ? 'bg-white text-stone-900 shadow-sm dark:bg-zinc-700 dark:text-zinc-100'
+                    : 'text-stone-500 hover:text-stone-700 dark:text-zinc-400 dark:hover:text-zinc-300'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div
         ref={scrollRef}
         className="scrollbar-hide flex gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]"
       >
-        {sortedProjects.map(project => (
+        {visibleProjects.map(project => (
           <ProjectCard key={project.title} project={project} />
         ))}
       </div>
