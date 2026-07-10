@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import Projects from './components/Projects'
 import Craftsmanship from './components/Craftsmanship'
 import Leadership from './components/Leadership'
+import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
         <Projects />
         <Craftsmanship />
         <Leadership />
+        <Contact />
       </main>
       <Footer />
     </div>
