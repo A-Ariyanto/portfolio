@@ -12,13 +12,13 @@ export default function Hero() {
             Abdullah Ariyanto
           </h1>
 
-          <p className="animate-fade-in-up animation-delay-100 mt-3 font-mono text-lg font-medium text-green-700 sm:text-xl dark:text-tcaneal-400">
+          <p className="animate-fade-in-up animation-delay-100 mt-3 font-mono text-lg font-medium text-green-700 sm:text-xl dark:text-teal-400">
             Full-Stack Software Engineer
           </p>
 
           <p className="animate-fade-in-up animation-delay-200 mt-6 text-lg leading-relaxed text-stone-500 dark:text-zinc-400">
-            Building secure cloud architectures, containerized applications, and
-            edge intelligence systems. Focused on writing clean,
+            Building containerized full-stack applications and practical
+            machine learning systems. Focused on writing clean,
             production-grade software that scales.
           </p>
 
@@ -44,7 +44,7 @@ export default function Hero() {
               </svg>
             </button>
             <button
-              onClick={() => scrollTo("leadership")}
+              onClick={() => scrollTo("contact")}
               className="inline-flex items-center gap-2 rounded-lg border border-stone-300 px-6 py-3 text-sm font-semibold text-stone-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-stone-400 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-500"
             >
               Contact Me
