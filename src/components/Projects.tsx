@@ -33,6 +33,85 @@ const TAG_CLASSES = 'rounded-md border border-stone-200 bg-stone-100 px-2.5 py-1
 
 const PROJECTS: Project[] = [
   {
+    title: 'UNSW Handbook RAG',
+    subtitle: 'Grounded Course-Enrolment Q&A — Ongoing',
+    category: 'ai',
+    tags: ['FastAPI', 'pgvector', 'RAG', 'SSE'],
+    starred: true,
+    tabs: [
+      {
+        id: 'overview',
+        label: 'Overview',
+        content: (
+          <div className="space-y-4">
+            <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
+              A retrieval-augmented generation service that answers real UNSW enrolment questions
+              with short, citation-grounded answers linking to the exact handbook sections. Built
+              end-to-end — scraper &rarr; hybrid retrieval &rarr; streaming API &rarr; measured
+              evaluation. On a 34-question golden set: 93% grounded, 96% cited, hybrid hit@5 93%.
+            </p>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {['FastAPI', 'PostgreSQL + pgvector', 'sentence-transformers', 'DeepSeek API', 'SSE Streaming', 'Docker + CI'].map(item => (
+                <div key={item} className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-xs font-medium text-stone-600 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        ),
+      },
+      {
+        id: 'architecture',
+        label: 'Architecture',
+        content: (
+          <div className="space-y-4">
+            <p className="leading-relaxed text-stone-600 dark:text-zinc-400">
+              A rate-limited, resumable scraper feeds a structure-aware chunker (splitting by section
+              semantics, not fixed token windows) into one Postgres table holding both a
+              vector(384) embedding column and a GIN-indexed tsvector. Queries fuse vector-KNN and
+              full-text search with Reciprocal Rank Fusion in a single SQL round-trip; a tuned
+              refusal threshold gates generation before streaming over SSE.
+            </p>
+            <div className="rounded-lg border border-stone-200 bg-stone-50 p-4 font-mono text-xs dark:border-zinc-700 dark:bg-zinc-800/50">
+              <div className="space-y-2 text-stone-500 dark:text-zinc-500">
+                <p><span className="font-semibold text-stone-800 dark:text-zinc-200">Scraper</span> &rarr; structure-aware chunker &rarr; <span className="font-semibold text-green-700 dark:text-teal-400">Postgres</span> (vector(384) + tsvector)</p>
+                <p><span className="font-semibold text-green-700 dark:text-teal-400">Vector-KNN + full-text</span> &rarr; RRF fusion &rarr; <span className="font-semibold text-amber-700 dark:text-amber-400">refusal gate</span></p>
+                <p><span className="font-semibold text-amber-700 dark:text-amber-400">/ask</span> &rarr; SSE (meta &rarr; token &rarr; done) &rarr; <span className="font-semibold text-stone-800 dark:text-zinc-200">citations [n] + query_logs</span></p>
+              </div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        id: 'challenges',
+        label: 'Challenges Solved',
+        content: (
+          <div className="space-y-3">
+            {[
+              {
+                title: 'Hybrid Retrieval (RRF)',
+                desc: 'A single SQL round-trip fuses a vector-KNN CTE and a full-text-search CTE with Reciprocal Rank Fusion, with single-method baselines kept for comparison.',
+              },
+              {
+                title: 'Refusal Gate vs. Hallucination',
+                desc: 'A tuned refusal threshold (balanced-accuracy optimum 0.96) gates generation — low-confidence retrievals skip the LLM and return the nearest matches instead of hallucinating.',
+              },
+              {
+                title: 'Measured, Honest Evaluation',
+                desc: 'A 34-question golden set and one-command eval harness report hit-rate@k per method and LLM-as-judge groundedness. The headline finding is reported straight: on this corpus a well-tuned full-text search beats hybrid (hit@3 89% vs 82%).',
+              },
+            ].map(item => (
+              <div key={item.title} className="rounded-lg border border-stone-200 p-4 dark:border-zinc-800">
+                <h4 className="mb-1 text-sm font-semibold text-stone-900 dark:text-zinc-100">{item.title}</h4>
+                <p className="text-sm leading-relaxed text-stone-600 dark:text-zinc-400">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        ),
+      },
+    ],
+  },
+  {
     title: 'AuraList',
     subtitle: 'AI Task Breakdown & Planning App — In Development',
     category: 'fullstack',
