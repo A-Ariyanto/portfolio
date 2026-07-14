@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useInView } from '../hooks/useInView'
 
 interface ContactLink {
@@ -44,6 +45,13 @@ const CONTACT_LINKS: ContactLink[] = [
 
 export default function Contact() {
   const { ref, inView } = useInView()
+  const [copied, setCopied] = useState('')
+
+  const copyEmail = (email: string) => {
+    navigator.clipboard.writeText(email)
+    setCopied(email)
+    setTimeout(() => setCopied(''), 2000)
+  }
 
   return (
     <section id="contact" className="border-t border-stone-200 py-24 dark:border-zinc-800">
@@ -66,26 +74,47 @@ export default function Contact() {
         </div>
 
         <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-3">
-          {CONTACT_LINKS.map(link => (
-            <a
-              key={link.label}
-              href={link.href}
-              {...(link.href.startsWith('mailto:')
-                ? {}
-                : { target: '_blank', rel: 'noopener noreferrer' })}
-              className="group flex items-center gap-4 rounded-2xl border border-stone-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-stone-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600"
-            >
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-stone-100 text-stone-600 transition-colors group-hover:bg-stone-900 group-hover:text-white dark:bg-zinc-800 dark:text-zinc-300 dark:group-hover:bg-teal-500 dark:group-hover:text-zinc-950">
-                {link.icon}
-              </div>
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">
-                  {link.label}
-                </p>
-                <p className="truncate text-sm text-stone-500 dark:text-zinc-500">{link.handle}</p>
-              </div>
-            </a>
-          ))}
+          {CONTACT_LINKS.map(link => {
+            const isEmail = link.href.startsWith('mailto:')
+            const className =
+              'group flex items-center gap-4 rounded-2xl border border-stone-200 bg-white p-5 text-left transition-all hover:-translate-y-0.5 hover:border-stone-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600'
+            const inner = (
+              <>
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-stone-100 text-stone-600 transition-colors group-hover:bg-stone-900 group-hover:text-white dark:bg-zinc-800 dark:text-zinc-300 dark:group-hover:bg-teal-500 dark:group-hover:text-zinc-950">
+                  {link.icon}
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">
+                    {link.label}
+                  </p>
+                  <p className="truncate text-sm text-stone-500 dark:text-zinc-500">
+                    {isEmail && copied === link.handle ? 'Copied!' : link.handle}
+                  </p>
+                </div>
+              </>
+            )
+
+            return isEmail ? (
+              <button
+                key={link.label}
+                type="button"
+                onClick={() => copyEmail(link.handle)}
+                className={className}
+              >
+                {inner}
+              </button>
+            ) : (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={className}
+              >
+                {inner}
+              </a>
+            )
+          })}
         </div>
       </div>
     </section>
