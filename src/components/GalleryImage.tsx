@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { categoryLabels, type GalleryItem } from '../data/gallery'
 
-const categoryIcon: Record<GalleryItem['category'], JSX.Element> = {
+const categoryIcon: Record<GalleryItem['category'], ReactNode> = {
   volunteering: (
     <path
       strokeLinecap="round"
