@@ -34,11 +34,19 @@ const aspectRatio: Record<GalleryItem['aspect'], string> = {
   square: '1 / 1',
 }
 
-function Placeholder({ item, style }: { item: GalleryItem; style?: React.CSSProperties }) {
+function Placeholder({
+  item,
+  style,
+  className = '',
+}: {
+  item: GalleryItem
+  style?: React.CSSProperties
+  className?: string
+}) {
   return (
     <div
       style={style}
-      className="flex w-full flex-col items-center justify-center gap-2 bg-stone-100 text-stone-400 dark:bg-zinc-800 dark:text-zinc-500"
+      className={`flex w-full flex-col items-center justify-center gap-2 bg-stone-100 text-stone-400 dark:bg-zinc-800 dark:text-zinc-500 ${className}`}
     >
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         {categoryIcon[item.category]}
