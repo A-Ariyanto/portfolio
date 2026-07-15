@@ -28,41 +28,72 @@ const categoryIcon: Record<GalleryItem['category'], ReactNode> = {
   ),
 }
 
+const aspectRatio: Record<GalleryItem['aspect'], string> = {
+  portrait: '3 / 4',
+  landscape: '4 / 3',
+  square: '1 / 1',
+}
+
+function Placeholder({ item, style }: { item: GalleryItem; style?: React.CSSProperties }) {
+  return (
+    <div
+      style={style}
+      className="flex w-full flex-col items-center justify-center gap-2 bg-stone-100 text-stone-400 dark:bg-zinc-800 dark:text-zinc-500"
+    >
+      <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        {categoryIcon[item.category]}
+      </svg>
+      <span className="font-mono text-xs">{categoryLabels[item.category]}</span>
+    </div>
+  )
+}
+
 interface GalleryImageProps {
   item: GalleryItem
-  className?: string
-  /** Grid uses object-cover; lightbox uses object-contain. */
+  /** 'cover' fills a fixed aspect box (grid); 'contain' shows natural size (lightbox). */
   fit?: 'cover' | 'contain'
+  className?: string
 }
 
 /** Renders the real image, falling back to a styled placeholder when it is
  * missing or fails to load. */
-export default function GalleryImage({ item, className = '', fit = 'cover' }: GalleryImageProps) {
+export default function GalleryImage({ item, fit = 'cover', className = '' }: GalleryImageProps) {
   const [failed, setFailed] = useState(false)
 
   // Reset the error state when the underlying item changes (e.g. lightbox nav).
   useEffect(() => setFailed(false), [item.src])
 
-  if (failed) {
-    return (
-      <div
-        className={`flex flex-col items-center justify-center gap-2 bg-stone-100 text-stone-400 dark:bg-zinc-800 dark:text-zinc-500 ${className}`}
-      >
-        <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-          {categoryIcon[item.category]}
-        </svg>
-        <span className="font-mono text-xs">{categoryLabels[item.category]}</span>
-      </div>
+  if (fit === 'contain') {
+    // Lightbox: natural image size; placeholder gets a viewport-relative box.
+    return failed ? (
+      <Placeholder
+        item={item}
+        style={{ aspectRatio: aspectRatio[item.aspect], height: '55vh', maxWidth: '100%' }}
+      />
+    ) : (
+      <img
+        src={item.src}
+        alt={item.alt}
+        onError={() => setFailed(true)}
+        className={`object-contain ${className}`}
+      />
     )
   }
 
+  // Grid: fixed aspect box, image (or placeholder) fills it.
   return (
-    <img
-      src={item.src}
-      alt={item.alt}
-      loading="lazy"
-      onError={() => setFailed(true)}
-      className={`${fit === 'cover' ? 'object-cover' : 'object-contain'} ${className}`}
-    />
+    <div className={`w-full overflow-hidden ${className}`} style={{ aspectRatio: aspectRatio[item.aspect] }}>
+      {failed ? (
+        <Placeholder item={item} style={{ height: '100%' }} />
+      ) : (
+        <img
+          src={item.src}
+          alt={item.alt}
+          loading="lazy"
+          onError={() => setFailed(true)}
+          className="h-full w-full object-cover"
+        />
+      )}
+    </div>
   )
 }
