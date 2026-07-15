@@ -76,6 +76,7 @@ export default function GalleryImage({ item, fit = 'cover', className = '' }: Ga
     return failed ? (
       <Placeholder
         item={item}
+        className="rounded-xl"
         style={{ aspectRatio: aspectRatio[item.aspect], height: '55vh', maxWidth: '100%' }}
       />
     ) : (
