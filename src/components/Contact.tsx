@@ -83,7 +83,7 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-3">
+        <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {CONTACT_LINKS.map(link => {
             const isEmail = link.href.startsWith('mailto:')
             const className =
