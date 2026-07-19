@@ -67,6 +67,9 @@ interface GalleryImageProps {
  * missing or fails to load. */
 export default function GalleryImage({ item, fit = 'cover', className = '' }: GalleryImageProps) {
   const [failed, setFailed] = useState(false)
+  // Item paths are root-relative ('/gallery/…'); prefix the Vite base path so
+  // they resolve when the site is served from a sub-path (e.g. /portfolio/).
+  const src = import.meta.env.BASE_URL + item.src.replace(/^\//, '')
 
   // Reset the error state when the underlying item changes (e.g. lightbox nav).
   useEffect(() => setFailed(false), [item.src])
@@ -81,7 +84,7 @@ export default function GalleryImage({ item, fit = 'cover', className = '' }: Ga
       />
     ) : (
       <img
-        src={item.src}
+        src={src}
         alt={item.alt}
         onError={() => setFailed(true)}
         className={`object-contain ${className}`}
@@ -96,7 +99,7 @@ export default function GalleryImage({ item, fit = 'cover', className = '' }: Ga
         <Placeholder item={item} style={{ height: '100%' }} />
       ) : (
         <img
-          src={item.src}
+          src={src}
           alt={item.alt}
           loading="lazy"
           onError={() => setFailed(true)}
