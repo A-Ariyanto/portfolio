@@ -17,9 +17,9 @@ export default function Hero() {
           </p>
 
           <p className="animate-fade-in-up animation-delay-200 mt-6 text-lg leading-relaxed text-stone-500 dark:text-zinc-400">
-            Building containerized full-stack applications and practical
-            machine learning systems. Focused on writing clean,
-            production-grade software that scales.
+            Building containerised full-stack applications and practical machine
+            learning systems. Focused on writing clean, production-grade
+            software that scales.
           </p>
 
           {/* CTA buttons */}
@@ -97,7 +97,7 @@ export default function Hero() {
             }}
           >
             <img
-              src={`${import.meta.env.BASE_URL}profile-picture.png`}
+              src={`${import.meta.env.BASE_URL}profile-picture.webp`}
               alt="Abdullah Ariyanto"
               className="h-full w-full object-cover object-top"
             />
