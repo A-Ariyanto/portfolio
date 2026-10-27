@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 interface VideoModalProps {
   isOpen: boolean
@@ -27,8 +28,10 @@ export default function VideoModal({ isOpen, onClose, title, videoUrl }: VideoMo
 
   if (!isOpen) return null
 
-  return (
-    <div className="animate-fade-in fixed inset-0 z-[100] flex items-center justify-center p-4">
+  // Portal to <body> so the modal is positioned against the viewport, not the
+  // masked, horizontally-scrolling project carousel it is declared inside.
+  return createPortal(
+    <div className="animate-fade-in fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-4">
       <div
         className="absolute inset-0 bg-black/70 backdrop-blur-sm"
         onClick={onClose}
@@ -71,6 +74,7 @@ export default function VideoModal({ isOpen, onClose, title, videoUrl }: VideoMo
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }
