@@ -309,6 +309,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Privacy-First Browser Productivity Tool",
     category: "fullstack",
     tags: ["React", "Tailwind CSS", "Manifest V3"],
+    videoUrl: "https://www.youtube.com/embed/DRhqOvuvn4k?vq=hd1080&rel=0",
     overview: {
       description:
         "A privacy-first workspace extension with modular Pomodoro timers, local-first analytics charts, and real-time site blocking. All data stays client-side with zero network calls. In closed beta with 5+ users; planning a public release.",

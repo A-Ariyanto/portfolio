@@ -56,6 +56,7 @@ export default function VideoModal({ isOpen, onClose, title, videoUrl }: VideoMo
                 src={videoUrl}
                 title={title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               />
             ) : (
