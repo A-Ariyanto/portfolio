@@ -41,13 +41,22 @@ export default function ProjectCard({ project }: { project: Project }) {
               Featured
             </div>
           )}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="rounded-lg border border-stone-200 bg-white/80 px-8 py-4 dark:border-zinc-700 dark:bg-zinc-800/80">
-              <p className="font-mono text-sm font-medium text-stone-500 dark:text-zinc-400">
-                Project Screenshot
-              </p>
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={`${project.title} screenshot`}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="rounded-lg border border-stone-200 bg-white/80 px-8 py-4 dark:border-zinc-700 dark:bg-zinc-800/80">
+                <p className="font-mono text-sm font-medium text-stone-500 dark:text-zinc-400">
+                  Project Screenshot
+                </p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="p-6 sm:p-8">

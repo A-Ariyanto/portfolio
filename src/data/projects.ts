@@ -24,6 +24,7 @@ export interface Project {
   tags: string[];
   starred?: boolean;
   videoUrl?: string;
+  image?: string;
   overview: { description: string; stack: string[] };
   architecture: { description: string; flow: FlowSegment[][] };
   challenges: Challenge[];
@@ -310,6 +311,7 @@ export const PROJECTS: Project[] = [
     category: "fullstack",
     tags: ["React", "Tailwind CSS", "Manifest V3"],
     videoUrl: "https://www.youtube.com/embed/DRhqOvuvn4k?vq=hd1080&rel=0",
+    image: "https://i.ytimg.com/vi/DRhqOvuvn4k/maxresdefault.jpg",
     overview: {
       description:
         "A privacy-first workspace extension with modular Pomodoro timers, local-first analytics charts, and real-time site blocking. All data stays client-side with zero network calls. In closed beta with 5+ users; planning a public release.",
